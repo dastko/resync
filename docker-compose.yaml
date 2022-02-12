@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  ptag-api:
+    build: .
+    image: "resync-api:latest"
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./envs/test.env
