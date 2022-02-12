@@ -71,7 +71,13 @@ class SynonymResources(object):
         query_params = req.context['queryParams']
         try:
             word = query_params.get('word', None)
-            resp.json = self.db.delete(word)
+            if word:
+                if not self.db.exist(word):
+                    resp.json = {"message": f"Word {word} is not found! Use POST method to create new word"}
+                    resp.status = falcon.HTTP_404
+                    return
+            self.db.delete([word])
+            resp.json = {"message": f"Word successfully deleted!"}
         except (ValueError, Exception) as exc:
             LOGGER.exception(f"Word is not deleted! {exc}")
             resp.status = falcon.HTTP_500

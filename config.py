@@ -11,7 +11,11 @@ REST_PORT = os.environ.get(
 if REST_PORT is None:
     raise ValueError("REST_PORT has to be provided.")
 
-SECURITY_TOKEN = os.environ.get("SECURITY_TOKEN", "TEST123")
+SECURITY_TOKEN = os.environ.get("SECURITY_TOKEN", None)
+
+if SECURITY_TOKEN is None:
+    raise ValueError("SECURITY_TOKEN has to be provided.")
+
 TOKEN_TYPE = os.environ.get("TOKEN_TYPE", "Bearer")
 
 REST_PORT = int(REST_PORT)

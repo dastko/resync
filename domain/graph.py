@@ -22,10 +22,10 @@ class Graph(object):
             try:
                 sets.remove(node)
             except KeyError as exc:
-                raise ValueError("Word is not found")
                 pass
         try:
             del self._graph[node]
+            return node
         except KeyError as exc:
             raise ValueError("Word is not found")
             pass
